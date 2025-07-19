@@ -5,23 +5,24 @@ This project is a WhatsApp bot built using Node.js, Express, and the Baileys lib
 ## Project Structure
 
 ```
-whatsapp-bot
+wa-bot-server
 ├── src
-│   ├── app.ts                # Entry point of the application
+│   ├── app.ts                # Entry point of the application (Express + bot)
 │   ├── bot
-│   │   └── index.ts          # WhatsApp bot logic
+│   │   └── whatsappBot.ts    # WhatsApp bot logic
 │   ├── controllers
-│   │   └── index.ts          # Route controllers
+│   │   └── messageController.ts # Route controllers
 │   ├── database
 │   │   └── orm.ts            # Database ORM
 │   ├── routes
 │   │   └── index.ts          # Route definitions
 │   └── types
 │       └── index.ts          # Type definitions
-├── docker-compose.yml         # Docker configuration for PostgreSQL
-├── package.json               # npm dependencies and scripts
+├── test.ts                   # Quick test script for WhatsApp bot
+├── docker-compose.yml        # Docker configuration for PostgreSQL
+├── package.json              # npm dependencies and scripts
 ├── tsconfig.json             # TypeScript configuration
-└── README.md                  # Project documentation
+└── README.md                 # Project documentation
 ```
 
 ## Setup Instructions
@@ -51,8 +52,22 @@ whatsapp-bot
 
 ## Usage
 
-- The bot listens for incoming messages on WhatsApp and can respond based on predefined logic.
-- You can extend the bot's functionality by modifying the `src/bot/index.ts` file.
+
+### Main Bot
+- The bot listens for incoming messages on WhatsApp and can respond based on predefined logic (see `src/bot/whatsappBot.ts`).
+- You can extend the bot's functionality by modifying `src/bot/whatsappBot.ts`.
+
+### Quick Test (without database or Express)
+You can test the WhatsApp bot logic directly using `test.ts`:
+
+1. Run:
+   ```
+   npx ts-node test.ts
+   ```
+2. Scan the QR code with your WhatsApp app ("Linked Devices").
+3. Send a message "hola" to the linked account. The bot will reply automatically with "¡Hola! Soy un bot 🤖".
+
+This is useful for quick bot testing without running the full backend or database.
 
 ## Contributing
 
