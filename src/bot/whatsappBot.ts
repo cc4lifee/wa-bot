@@ -45,6 +45,18 @@ export class WhatsAppBot {
         const text = msg.message?.conversation || msg.message?.extendedTextMessage?.text;
 
         if (text && sender) {
+          const lowerText = text.toLowerCase();
+          if (
+            lowerText.includes('hola') ||
+            lowerText.includes('buenas') ||
+            lowerText.includes('buenos días') ||
+            lowerText.includes('buenas tardes') ||
+            lowerText.includes('buenas noches')
+          ) {
+            await this.sock?.sendMessage(sender, {
+              text: `¡Gracias por comunicarte con [Nombre del Local]! 😊\n\nNuestros horarios son:\nLunes a Sábado: 9am - 8pm\nDomingo: 10am - 6pm\n\nMenú:\n- Tacos\n- Tortas\n- Burritos\n- Bebidas\n\n¿En qué podemos ayudarte hoy?`
+            });
+          }
           // Ejemplo: responde a "ping"
           if (text.toLowerCase() === 'ping') {
             await this.sock?.sendMessage(sender, { text: 'pong' });
