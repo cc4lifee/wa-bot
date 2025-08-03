@@ -1,13 +1,12 @@
-export interface Message {
-    id: string;
-    senderId: string;
-    content: string;
-    timestamp: Date;
-}
+// Re-exportar tipos comunes desde wa-bot-common
+export * from '@common/index';
 
-export interface User {
-    id: string;
-    name: string;
-    phoneNumber: string;
-    isActive: boolean;
+// Tipos específicos del servidor que no van en common
+export interface ServerConfig {
+    port: number;
+    dbHost: string;
+    dbPort: number;
+    dbName: string;
+    dbUser: string;
+    dbPassword: string;
 }
