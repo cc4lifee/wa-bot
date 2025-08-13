@@ -12,7 +12,7 @@ export class MessageController {
   public async getStatus(req: Request, res: Response): Promise<void> {
     try {
       res.json({ status: 'ok', timestamp: Date.now() });
-    } catch (error) {
+    } catch (_error) {
       res.status(500).json({ error: 'Internal Server Error', code: 'ERR_GET_STATUS' });
     }
   }
@@ -141,7 +141,7 @@ export class MessageController {
         timestamp
       ];
 
-      const result = await this.db.query(dbQuery, values);
+      await this.db.query(dbQuery, values);
       
       const response: ApiResponse = {
         success: true,
@@ -215,7 +215,7 @@ export class MessageController {
       };
       
       // Consulta directa a la base de datos
-      let dbQuery = `
+      const dbQuery = `
         SELECT * FROM users 
         WHERE is_active = true 
         ORDER BY created_at DESC 
